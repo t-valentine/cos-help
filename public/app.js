@@ -60,15 +60,31 @@ const rollHelp = () => {
   let result = document.getElementById('roll-p');
   result.innerHTML = "";
 
-  if (selection == 'damage') {
-    result.append("Check your weapon/spell's damage die.");
-  }
-  else if (selection == 'cast') {
-    result.append("If the spell mentions a save, the target rolls against your spell save. ");
-    result.append("If no save is mentioned, roll a d20 and add your spellcasting modifier to the roll.");
-  }
-  else {
-    result.append("Roll a d20");
+
+  switch (selection) {
+    case "ability":
+      result.append("Roll a d20 and add the ability's modifier.");
+      break;
+    case "cast":
+      result.append("If the spell mentions a save, the target rolls against your spell save. ");
+      result.append("If no save is mentioned, roll a d20 and add your spellcasting modifier to the roll.");
+      break;
+    case "damage":
+      result.append("Roll your weapon's damage die and add strength or dex modifier.");
+      break;
+    case "hit":
+      result.append("Roll a d20, add strength or dex modifier, and your proficiency bonus (if you're proficient with the weapon).");
+      //result.append("d20 + ability modifier (strength or dex) + proficiency bonus (if proficient with the weapon)")
+      break;
+    case "initiative":
+      result.append("Roll a d20 and add your dex mod.");
+      break;
+    case "skill":
+      result.append("Roll a d20, add the associated ability's modifier, and and your proficiency bonus (if you're proficient in the skill). ");
+      result.append("(If you're not sure what ability corresponds to the skill, check the previous section.)");
+      break;
+    default:
+      result.append("Roll a d20");
   }
 }
 
