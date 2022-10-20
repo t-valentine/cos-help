@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Macondo&family=Roboto&display=swap');
 
 body {
   background-color: #F2EAE1;
   color: #0F0F0F;
-  font-family: 'Roboto', sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 select {
@@ -11,7 +10,7 @@ select {
   border: 2px solid transparent;
   border-radius: 5px;
   color: #0F0F0F;
-  font-family: 'Roboto', sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 16px;
   padding: 5px;
   text-align: center;
@@ -27,7 +26,6 @@ div {
   align-items: center;
   display: flex;
   height: 1.5em;
-  font-family: 'Macondo', cursive;
   justify-content: center;
 }
 
@@ -129,7 +127,7 @@ div {
   border: 2px solid #972c3a;
   border-radius: 10px;
   cursor: pointer;
-  color: #f3b1ac;
+  color: #F2EAE1;
   font-size: 10px;
   width: 50%;
 }
