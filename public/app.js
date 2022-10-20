@@ -117,16 +117,17 @@ const characterHelp = () => {
       monkHelper(result, prof, level, 2);
       break;
     case "clyde":
-      spellcasterHelper(result, prof, level, 0, 'cleric');
+      //spellcasterHelper(result, prof, level, 0, 'cleric');
+      clericHelper(result, prof, level, 0);
       break;
     case "izzy":
       barbarianHelper(result, level);
       break;
     case "karrde":
-      spellcasterHelper(result, prof, level, 3, 'strider');
+      striderHelper(result, prof, level, 3);
       break;
     case "worm":
-      spellcasterHelper(result, prof, level, 3, 'artificer');
+      artificerHelper(result, prof, level, 3);
       break;
   }
 }
@@ -263,31 +264,46 @@ const barbarianHelper = (div, level) => {
   wildMagicTxt.append(`${surgeEffect}`);
 }
 
-/**
- * Calculates and displays spell information for full spellcaster classes
- * @param {*} div where the information will return on the webpage
- * @param {*} div2 where the information will return on the webpage
- * @param {*} proficiency character's proficiency bonus as calculated in characterHelp()
- * @param {*} level character's current level
- * @param {*} modifier character's spellcasting modifier 
- * @param {*} _class character's combat class
- * @returns Spellcasting ability, Spellcasting Modifier, Spell Save, and Spells Known
- */
-const spellcasterHelper = (div, proficiency, level, modifier, _class) => {
-  let ability, spellsave;
-  // Sets spellcasting ability and spellsave
-  if (_class == 'cleric') {
-    ability = `Wisdom (+${modifier})`;
-    spellsave = modifier + parseInt(level);
+const artificerHelper = (div, proficiency, level, modifier) => {
+  let ability = `Intelligence (+${modifier})`;
+  let spellcastModifier = parseInt(proficiency) + parseInt(modifier);
+  let spellsKnown = modifier + Math.floor(level/2); 
+  let spellSave = modifier + proficiency + 8;
+  spellcasterHelper(div, ability, spellcastModifier, spellSave, 0, spellsKnown)
+}
+
+const clericHelper = (div, proficiency, level, modifier) => {
+  let ability, cantrips, spellsKnown, spellSave;
+
+  ability = `Wisdom (+${modifier})`;
+  spellcastModifier = parseInt(proficiency) + parseInt(modifier);
+  spellsKnown = parseInt(level) + parseInt(modifier);
+  spellSave = modifier + proficiency + 8;
+
+  switch (level) {
+    case (level < 4):
+      cantrips = 3
+      break;
+    case (level < 10):
+      cantrips = 4
+      break;
+    default:
+      cantrips = 5
   }
-  else if (_class == 'strider') {
-    ability = `Charisma (+${modifier})`;
-    spellsave = modifier + Math.floor(level/2);
-  }
-  else if (_class == 'artificer') {
-    ability = `Intelligence (+${modifier})`;
-    spellsave = modifier + Math.floor(level/2);
-  }
+
+  spellcasterHelper(div, ability, spellcastModifier, spellSave, cantrips, spellsKnown);
+
+}
+
+const striderHelper = (div, proficiency, level, modifier) => {
+  let ability = `Charisma (+${modifier})`;
+  let spellcastModifier = parseInt(proficiency) + parseInt(modifier);
+  let spellsKnown = modifier + Math.floor(level/2); 
+  let spellSave = modifier + proficiency + 8;
+  spellcasterHelper(div, ability, spellcastModifier, spellSave, 0, spellsKnown)
+}
+
+const spellcasterHelper = (div, ability, modifier, save, cantrips, spellsKnown) => {
 
   // Spell Ability
   let spellAbilityTxt = div.appendChild(document.createElement('p'));
@@ -303,7 +319,7 @@ const spellcasterHelper = (div, proficiency, level, modifier, _class) => {
   let modifierTitle = modifiertxt.appendChild(document.createElement('span'))
   modifierTitle.classList.add('bolder');
   modifierTitle.append("Spellcasting Modifier: ");
-  modifiertxt.append(`+${proficiency + modifier}`);
+  modifiertxt.append(modifier)
 
   // Spell Save
   let spellSaveTxt = div.appendChild(document.createElement('p'));
@@ -311,17 +327,24 @@ const spellcasterHelper = (div, proficiency, level, modifier, _class) => {
   let spellSaveTitle = spellSaveTxt.appendChild(document.createElement('span'))
   spellSaveTitle.classList.add('bolder');
   spellSaveTitle.append("Spell Save: ");
-  spellSaveTxt.append(modifier + proficiency + 8);
-
-  if (_class == 'cleric' || _class == 'artificer') {
-    // Spells Known
-    let spellKnownTxt = div.appendChild(document.createElement('p'));
-    spellKnownTxt.classList.add("character-stats");
-    let spellKnownTitle = spellKnownTxt.appendChild(document.createElement('span'))
-    spellKnownTitle.classList.add('bolder');
-    spellKnownTitle.append("Spells Known: ");
-    spellKnownTxt.append(spellsave);
+  spellSaveTxt.append(save);
+  
+  // Cantrips Known - only displays if the character knows more than one
+  if (cantrips > 0) {
+    let cantripsKnownTxt = div.appendChild(document.createElement('p'));
+    cantripsKnownTxt.classList.add("character-stats");
+    let cantripsKnownTitle = cantripsKnownTxt.appendChild(document.createElement('span'))
+    cantripsKnownTitle.classList.add('bolder');
+    cantripsKnownTitle.append(`Cantrips Known: `);
+    cantripsKnownTxt.append(cantrips)
   }
+  // Spells Known
+  let spellKnownTxt = div.appendChild(document.createElement('p'));
+  spellKnownTxt.classList.add("character-stats");
+  let spellKnownTitle = spellKnownTxt.appendChild(document.createElement('span'))
+  spellKnownTitle.classList.add('bolder');
+  spellKnownTitle.append(`Spells Known: `);
+  spellKnownTxt.append(spellsKnown)
 } 
 
 /**
