@@ -133,48 +133,18 @@ const characterHelp = () => {
 }
 
 /**
- * Calculates and displays spell information for the Monk class
+ * Calculates Artificier Spellcasting info and passes to SpellcasterHelper
  * @param {*} div where the information will return on the webpage
+ * @param {*} proficiency character's proficiency bonus as calculated in characterHelp()
  * @param {*} level character's current level
  * @param {*} modifier character's Dexterity modifier 
- * @param {*} proficiency character's proficiency bonus as calculated in characterHelp()
- * @returns Martial Arts Di, Total Ki Points, and Ki Save DC
  */
-const monkHelper = (div, level, modifier, proficiency) => {
-  // Calculates Martial Arts Di
-  let dice = "1d4";
-  if (level > 4 && level < 11) {
-    dice = "1d6"; 
-  } else if (level > 10 && level < 16) {
-    dice = "1d8"; 
-  }
-  else if (level >= 16) {
-    dice = "1d10"; 
-  }
-
-  let martialTxt = div.appendChild(document.createElement('p'));
-  martialTxt.classList.add("character-stats");
-  let martialTitle = martialTxt.appendChild(document.createElement('span'))
-  martialTitle.classList.add("bolder");
-  martialTitle.append("Martial Arts Die: ");
-  martialTxt.append(dice);
-  
-  // Calculates Ki Points
-  let kiPointsTxt = div.appendChild(document.createElement('p'));
-  kiPointsTxt.classList.add("character-stats");
-  let kiPointsTitle = kiPointsTxt.appendChild(document.createElement('span'));
-  kiPointsTitle.classList.add("bolder");
-  kiPointsTitle.append("Total Ki Points: ");
-  kiPointsTxt.append(`${level}`);
-  
-  // Calculates Ki Save DC
-  let kiSaveTxt = div.appendChild(document.createElement('p'));
-  kiSaveTxt.classList.add("character-stats");
-  kiSaveTitle = kiSaveTxt.appendChild(document.createElement('span'));
-  kiSaveTitle.classList.add("bolder");
-  kiSaveTitle.append("Ki Save DC: ");
-  kiSaveTxt.append(`${8 + proficiency} + Wisdom modifier  (+${modifier}) = ${8 + proficiency + modifier}`);
-        
+const artificerHelper = (div, proficiency, level, modifier) => {
+  let ability = `Intelligence (+${modifier})`;
+  let spellcastModifier = parseInt(proficiency) + parseInt(modifier);
+  let spellsKnown = modifier + Math.floor(level/2); 
+  let spellSave = modifier + proficiency + 8;
+  spellcasterHelper(div, ability, spellcastModifier, spellSave, 0, spellsKnown)
 }
 
 /**
@@ -183,7 +153,7 @@ const monkHelper = (div, level, modifier, proficiency) => {
  * @param {*} level character's current level
  * @returns # of Rages, Rage damage bonus, and Wild Magic Surge Effect
  */
-const barbarianHelper = (div, level) => {
+ const barbarianHelper = (div, level) => {
   // Calculates # of Rages
   let rages = 2;
   if (level > 2 && level < 6) {
@@ -264,14 +234,14 @@ const barbarianHelper = (div, level) => {
   wildMagicTxt.append(`${surgeEffect}`);
 }
 
-const artificerHelper = (div, proficiency, level, modifier) => {
-  let ability = `Intelligence (+${modifier})`;
-  let spellcastModifier = parseInt(proficiency) + parseInt(modifier);
-  let spellsKnown = modifier + Math.floor(level/2); 
-  let spellSave = modifier + proficiency + 8;
-  spellcasterHelper(div, ability, spellcastModifier, spellSave, 0, spellsKnown)
-}
 
+/**
+ * Calculates Cleric Spellcasting info and passes to SpellcasterHelper
+ * @param {*} div where the information will return on the webpage
+ * @param {*} proficiency character's proficiency bonus as calculated in characterHelp()
+ * @param {*} level character's current level
+ * @param {*} modifier character's Dexterity modifier 
+ */
 const clericHelper = (div, proficiency, level, modifier) => {
   let ability, cantrips, spellsKnown, spellSave;
 
@@ -295,6 +265,58 @@ const clericHelper = (div, proficiency, level, modifier) => {
 
 }
 
+/**
+ * Calculates and displays spell information for the Monk class
+ * @param {*} div where the information will return on the webpage
+ * @param {*} level character's current level
+ * @param {*} modifier character's Dexterity modifier 
+ * @param {*} proficiency character's proficiency bonus as calculated in characterHelp()
+ * @returns Martial Arts Di, Total Ki Points, and Ki Save DC
+ */
+ const monkHelper = (div, level, modifier, proficiency) => {
+  // Calculates Martial Arts Di
+  let dice = "1d4";
+  if (level > 4 && level < 11) {
+    dice = "1d6"; 
+  } else if (level > 10 && level < 16) {
+    dice = "1d8"; 
+  }
+  else if (level >= 16) {
+    dice = "1d10"; 
+  }
+
+  let martialTxt = div.appendChild(document.createElement('p'));
+  martialTxt.classList.add("character-stats");
+  let martialTitle = martialTxt.appendChild(document.createElement('span'))
+  martialTitle.classList.add("bolder");
+  martialTitle.append("Martial Arts Die: ");
+  martialTxt.append(dice);
+  
+  // Calculates Ki Points
+  let kiPointsTxt = div.appendChild(document.createElement('p'));
+  kiPointsTxt.classList.add("character-stats");
+  let kiPointsTitle = kiPointsTxt.appendChild(document.createElement('span'));
+  kiPointsTitle.classList.add("bolder");
+  kiPointsTitle.append("Total Ki Points: ");
+  kiPointsTxt.append(`${level}`);
+  
+  // Calculates Ki Save DC
+  let kiSaveTxt = div.appendChild(document.createElement('p'));
+  kiSaveTxt.classList.add("character-stats");
+  kiSaveTitle = kiSaveTxt.appendChild(document.createElement('span'));
+  kiSaveTitle.classList.add("bolder");
+  kiSaveTitle.append("Ki Save DC: ");
+  kiSaveTxt.append(`${8 + proficiency} + Wisdom modifier  (+${modifier}) = ${8 + proficiency + modifier}`);
+        
+}
+
+/**
+ * Calculates Strider Spellcasting info and passes to SpellcasterHelper
+ * @param {*} div where the information will return on the webpage
+ * @param {*} proficiency character's proficiency bonus as calculated in characterHelp()
+ * @param {*} level character's current level
+ * @param {*} modifier character's Dexterity modifier 
+ */
 const striderHelper = (div, proficiency, level, modifier) => {
   let ability = `Charisma (+${modifier})`;
   let spellcastModifier = parseInt(proficiency) + parseInt(modifier);
@@ -303,6 +325,17 @@ const striderHelper = (div, proficiency, level, modifier) => {
   spellcasterHelper(div, ability, spellcastModifier, spellSave, 0, spellsKnown)
 }
 
+
+/**
+ * Takes info from Class Helper and displays Spellcaster Info
+ * @param {*} div where the information will return on the webpage
+ * @param {*} ability the spellcaster's spellcasting ability
+ * @param {*} modifier character's spellcasting modifier 
+ * @param {*} save character's spell save
+ * @param {*} cantrips the total number of cantrips the character knows
+ * @param {*} spellsKnown the total number of spells kthe character knows
+ * @returns All the following in a neat little UI (too much to type)
+ */
 const spellcasterHelper = (div, ability, modifier, save, cantrips, spellsKnown) => {
 
   // Spell Ability
