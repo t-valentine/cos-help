@@ -131,7 +131,6 @@ const characterHelp = () => {
       monkHelper(result, prof, level, 2);
       break;
     case "clyde":
-      //spellcasterHelper(result, prof, level, 0, 'cleric');
       clericHelper(result, prof, level, 0);
       break;
     case "izzy":
@@ -329,7 +328,7 @@ const monkHelper = (div, level, modifier, proficiency) => {
   kiSaveTitle.append("Ki Save DC: ");
   kiSaveTxt.append(
     `${8 + proficiency} + Wisdom modifier  (+${modifier}) = ${
-      8 + proficiency + modifier
+      8 + proficiency + parseInt(modifier)
     }`
   );
 };
