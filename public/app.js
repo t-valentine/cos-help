@@ -70,10 +70,10 @@ const rollHelp = () => {
       result.append("If no save is mentioned, roll a d20 and add your spellcasting modifier to the roll.");
       break;
     case "damage":
-      result.append("Roll your weapon's damage die and add strength or dex modifier.");
+      result.append("Roll your weapon's damage die and add your strenght, dexterity, or spellcasting modifier");
       break;
     case "hit":
-      result.append("Roll a d20, add strength or dex modifier, and your proficiency bonus (if you're proficient with the weapon).");
+      result.append("Roll a d20, add strength or dexterity modifier, and your proficiency bonus (if you're proficient with the weapon).");
       //result.append("d20 + ability modifier (strength or dex) + proficiency bonus (if proficient with the weapon)")
       break;
     case "initiative":
@@ -81,7 +81,6 @@ const rollHelp = () => {
       break;
     case "skill":
       result.append("Roll a d20, add the associated ability's modifier, and and your proficiency bonus (if you're proficient in the skill). ");
-      result.append("(If you're not sure what ability corresponds to the skill, check the previous section.)");
       break;
     default:
       result.append("Roll a d20");

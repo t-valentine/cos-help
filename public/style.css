@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap');
 
 body {
-    background-color: blanchedalmond;
+    background-color: #394bc8;
     font-family: 'Atkinson Hyperlegible', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+  background-color: #fec2ce;
+  padding: 10px;
+  text-align: center;
 }
 
 #content {
@@ -11,13 +19,40 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1em;
+    padding: 1em 2em 0 2em;
 }
 
-div:not(.header):not(#content):not(#top-section) {
-    background-color: red;
-    border: transparent;
-    border-radius: 15px;
-    padding: 10px;
+.mini-box {
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.mini-box:not(#character-section) {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+
+.mini-box:not(#character-section) div:first-child {
+  width: 100%;
+}
+
+.mini-box:not(#character-section) div:last-child {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  padding: 2px;
+  width: 100%;
+}
+
+.answer {
+  background-color: #fec2ce;
+}
+
+.blank {
+  background-color: #d5c3fd;
 }
 
 #top-section {
@@ -26,36 +61,16 @@ div:not(.header):not(#content):not(#top-section) {
     flex-direction: column;
     gap: 1em;
 }
-
 #character-section {
-    background-color: aqua;
     width: 55%;
 }
 
-.modal {
-    border-radius: 0px;
-    display: none;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  
-  #modal-content {
-    background-color: #F2EAE1;
-    border: 1px solid #888;
-    color: #0F0F0F;
-    margin: auto;
-    padding: 20px;
-    width: 80%;
-  }
+#unique-info {
+  text-align: left;
+  padding: 0 10px;
+}
 
-
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   
     #top-section, #character-section {
         width: 100%;

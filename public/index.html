@@ -16,15 +16,15 @@ You can view the GitHub here, feel free to make your own: https://github.com/t-v
 </head>
 
 <body>
-  <div class="header">
+  <div id="header">
     <p class="title">D&amp;D Help!</p>
   </div>
   <div id="content">
     <div id="top-section">
-        <div>
+        <div class="mini-box">
+          <div>
             <h2>Ability</h2>
             <select name="skills" id="skills" onchange="skillsHelp()">
-                <option selected disabled>Choose Skill</option>
                 <option selected disabled>Choose Skill</option>
                 <option value="acrobatics">Acrobatics</option>
                 <option value="animal">Animal Handling</option>
@@ -45,12 +45,15 @@ You can view the GitHub here, feel free to make your own: https://github.com/t-v
                 <option value="stealth">Stealth</option>
                 <option value="survival">Survival</option>
             </select>
+          </div>
+            
             <div id="ability" class="blank">
                 <!-- This is where text will generate based on chosen option -->
                 <p id="skill-p"></p>
             </div>
         </div>
-        <div>
+        <div class="mini-box">
+          <div>
             <h2>Dice</h2>
             <select name="rolls" id="rolls" onchange="rollHelp()">
                 <option selected disabled>Choose Roll Type</option>
@@ -61,13 +64,14 @@ You can view the GitHub here, feel free to make your own: https://github.com/t-v
                 <option value="ability">Rolling an Ability Check</option>
                 <option value="skill">Rolling a Skill Save</option>
             </select>
-            <div id="roll" class="blank">
+          </div>
+            <div id="roll" class="blank" style="font-size: .85em;">
             <!-- This is where text will generate based on chosen option -->
             <p id="roll-p"></p>
             </div>
         </div>
     </div>
-    <div id="character-section">
+    <div id="character-section" class="mini-box">
         <h2>Character Info</h2>
         <select name="character" id="character" onchange="characterHelp()">
             <option selected disabled>Select Character</option>
@@ -83,7 +87,7 @@ You can view the GitHub here, feel free to make your own: https://github.com/t-v
             <option value="7">7</option>
         </select>
         <div id="unique-info">
-            <p>Select a character to view information.</p>
+            <p style="text-align: center;">Select a character to view information.</p>
         </div>
         
     </div>
