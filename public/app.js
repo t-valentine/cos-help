@@ -111,6 +111,14 @@ const characterHelp = () => {
     prof = 5;
   }
 
+  // Print Proficiency Bonus
+  let proficiencyBonus = result.appendChild(document.createElement('p'));
+  proficiencyBonus.classList.add("character-stats");
+  let proficiencyBonusTitle = proficiencyBonus.appendChild(document.createElement('span'))
+  proficiencyBonusTitle.classList.add("bolder");
+  proficiencyBonusTitle.append("Proficiency Bonus: ");
+  proficiencyBonus.append("+" + prof);
+
   // provide character info
   switch (character) {
     case "amy":
@@ -139,7 +147,7 @@ const characterHelp = () => {
  * @param {*} proficiency character's proficiency bonus as calculated in characterHelp()
  * @returns Martial Arts Di, Total Ki Points, and Ki Save DC
  */
-const monkHelper = (div, level, modifier, proficiency) => {
+const monkHelper = (div, proficiency, level, modifier) => {
   // Calculates Martial Arts Di
   let dice = "1d4";
   if (level > 4 && level < 11) {
@@ -150,6 +158,13 @@ const monkHelper = (div, level, modifier, proficiency) => {
   else if (level >= 16) {
     dice = "1d10"; 
   }
+
+  let abilityTxt = div.appendChild(document.createElement('p'));
+  abilityTxt.classList.add("character-stats");
+  let abilityalTitle = abilityTxt.appendChild(document.createElement('span'))
+  abilityalTitle.classList.add("bolder");
+  abilityalTitle.append("Dexterity Modifier: ");
+  abilityTxt.append(modifier);
 
   let martialTxt = div.appendChild(document.createElement('p'));
   martialTxt.classList.add("character-stats");
@@ -172,7 +187,7 @@ const monkHelper = (div, level, modifier, proficiency) => {
   kiSaveTitle = kiSaveTxt.appendChild(document.createElement('span'));
   kiSaveTitle.classList.add("bolder");
   kiSaveTitle.append("Ki Save DC: ");
-  kiSaveTxt.append(`${8 + proficiency} + Wisdom modifier  (+${modifier}) = ${8 + proficiency + modifier}`);
+  kiSaveTxt.append(8 + proficiency + parseInt(modifier));
         
 }
 
@@ -274,19 +289,20 @@ const barbarianHelper = (div, level) => {
  * @returns Spellcasting ability, Spellcasting Modifier, Spell Save, and Spells Known
  */
 const spellcasterHelper = (div, proficiency, level, modifier, _class) => {
-  let ability, spellsave;
-  // Sets spellcasting ability and spellsave
-  if (_class == 'cleric') {
-    ability = `Wisdom (+${modifier})`;
-    spellsave = modifier + parseInt(level);
-  }
-  else if (_class == 'strider') {
-    ability = `Charisma (+${modifier})`;
-    spellsave = modifier + Math.floor(level/2);
-  }
-  else if (_class == 'artificer') {
-    ability = `Intelligence (+${modifier})`;
-    spellsave = modifier + Math.floor(level/2);
+  let ability, spellSave, attackMod;
+
+  switch (_class) {
+      case "artificer":
+          ability = `Intelligence (+${modifier})`;
+          break;
+      case "cleric":
+          ability = `Wisdom (+${modifier})`;
+          break;
+      case "strider":
+          ability = `Charisma (+${modifier})`;
+          break;
+      default:
+          result.append("Please refresh page");
   }
 
   // Spell Ability
@@ -320,35 +336,6 @@ const spellcasterHelper = (div, proficiency, level, modifier, _class) => {
     let spellKnownTitle = spellKnownTxt.appendChild(document.createElement('span'))
     spellKnownTitle.classList.add('bolder');
     spellKnownTitle.append("Spells Known: ");
-    spellKnownTxt.append(spellsave);
+    spellKnownTxt.append(0);
   }
 } 
-
-/**
- * Opens and closes modal
- * @returns Information about how spellcasting information is calculated
- */
-const openModal = () => {
-  var modal = document.getElementById("myModal");
-  var button = document.getElementById("spellhelp-text");
-  var closeButton = document.getElementById("close-button");
-
-  // When the user clicks on the button, open the modal
-  button.onclick = function() {
-    modal.style.display = "block";
-  }
-
-  // When the user clicks on <span> (x), close the modal
-  closeButton.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-}
-
-openModal();
