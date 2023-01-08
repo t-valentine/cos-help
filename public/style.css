@@ -2,14 +2,31 @@
 
 body {
     background-color: #394bc8;
+    background-size: 40px 40px;
     font-family: 'Atkinson Hyperlegible', sans-serif;
+    background-image:
+    linear-gradient(to right, #5d73ff 1px, transparent 1px),
+    linear-gradient(to bottom, #5d73ff 1px, transparent 1px);
+	background-position: top;
     margin: 0;
     padding: 0;
 }
 
+h2 {
+  color: #2e198d;
+}
+
+select {
+  background-color:white;
+  border: #394bc8 solid 2px;
+  border-radius: 5px;
+  height: 2.5em;
+}
+
 #header {
-  background-color: #fec2ce;
-  padding: 10px;
+  background-color: white;
+  color:#394bc8;
+  padding: 1px;
   text-align: center;
 }
 
