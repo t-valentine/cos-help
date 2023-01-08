@@ -17,11 +17,13 @@ If you want to tailor this app for your own game, or for a more general audience
     The select list only includes character names, this can be edited to reflect other players in your game or all classes
 - 'level' Select on `line 84` of index.html   
     To prevent players in my game from getting confused, only the player's current level and 2 more are shown. The logic in app.js can handle proficiency bonsuses for all 20 levels, just the front-end is limited.
-- characterHelp() on `line 79` of app.js
+- characterHelp() on `line 95` of app.js
 
-    This is the section that will need the most editing. On `line 99` there's a switch statement for selecting different characters. This can be set up for your own characters or all classes. There is no default on my switch statement, depending on the edits you make you want to ensure you have one.
+    This is the section that will need the most editing. On `line 122` there's a switch statement for selecting different characters. This can be set up for your own characters or all classes. There is no default on my switch statement, depending on the edits you make you want to ensure you have one.
 
-    The helper method spellcasterHelp() on `line 260` only has functionality for artificers, clerics, and striders (see below). If you want to implement this for more than 3 types of spellcasters, you may want to change the if/else statement for a switch statement.
+    The barbarianHelp() function on `line 199` has specific output for Path of the Wild Magic barbarians where a magical effect is randomly generated. This can be removed if not relevent to your game.
+
+    The helper method spellcasterHelper() on `line 290` only has functionality for artificers, clerics, and striders (see below). If you want to implement this for more than 3 types of spellcasters, you may want to change the if/else statement for a switch statement.
 - Karrde is a homebrew class called Strider, more information about that class can be found [here](https://dandwiki.com/wiki/strider_(5e_Class)). Our table decided her Spellcasting Ability is Charisma, as it's not listed on the homebrew page. Since she gets certain spells when leveling, there's an if/else statement on `line 300` you can delete. 
 
 ### Classes
