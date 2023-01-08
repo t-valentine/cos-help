@@ -4,7 +4,7 @@ This is a simple website designed to help my friends and I play Dungeons and Dra
 This uses simple HTML, CSS, and JavaScript so that the 
 website can be deployed on Neocities. You can see the live version of the application [here](https://strahd-help.neocities.org/). 
 
-This site uses [Deploy to Neocities](https://github.com/marketplace/actions/deploy-to-neocities) to allow me to edit your site and deploy changes easily.
+This site uses [Deploy to Neocities](https://github.com/marketplace/actions/deploy-to-neocities) to allow me to edit the site and deploy changes easily.
 
 ## Using This Website
 This is a simple website, so just opening `index.html` will allow you to begin using the website locally. You can use a wide variety of services to deploy the website (like Neocities, or if you want to get fanicer something like Vercel).
@@ -13,18 +13,15 @@ The website is built with mobile use in mind, but can also be used on a tablet o
 
 ## Editing the Site for Your Own Use
 If you want to tailor this app for your own game, or for a more general audience the following will need to be changed:
-- 'character' Select on `line 77` of index.html   
+- 'character' Select on `line 80` of index.html   
     The select list only includes character names, this can be edited to reflect other players in your game or all classes
-- 'level' Select on `line 84` of index.html   
+- 'level' Select on `line 88` of index.html   
     To prevent players in my game from getting confused, only the player's current level and 2 more are shown. The logic in app.js can handle proficiency bonsuses for all 20 levels, just the front-end is limited.
-- characterHelp() on `line 95` of app.js
+- characterHelp() on `line 111` of app.js
 
-    This is the section that will need the most editing. On `line 122` there's a switch statement for selecting different characters. This can be set up for your own characters or all classes. There is no default on my switch statement, depending on the edits you make you want to ensure you have one.
+    This is the section that will need the most editing. On `line 129` there's a switch statement for selecting different characters. This can be set up for your own characters or all classes. There is no default on my switch statement, depending on the edits you make you want to ensure you have one. All class helper functions are in alphabetical order in the document. 
 
-    The barbarianHelp() function on `line 199` has specific output for Path of the Wild Magic barbarians where a magical effect is randomly generated. This can be removed if not relevent to your game.
-
-    The helper method spellcasterHelper() on `line 290` only has functionality for artificers, clerics, and striders (see below). If you want to implement this for more than 3 types of spellcasters, you may want to change the if/else statement for a switch statement.
-- Karrde is a homebrew class called Strider, more information about that class can be found [here](https://dandwiki.com/wiki/strider_(5e_Class)). Our table decided her Spellcasting Ability is Charisma, as it's not listed on the homebrew page. Since she gets certain spells when leveling, there's an if/else statement on `line 300` you can delete. 
+    The helper method spellcasterHelp() on `line 361` takes input from other class-specific helper functions. Right now, there's functionality for artificers, clerics, and a homebrew class called [Strider](https://dandwiki.com/wiki/strider_(5e_Class)). You should be able to change the artificerHelper Function on `line 155` so it works for any partial spellcasting class and the clericHelper function on `line 260` can be copied and edited for other full spellcasting classes.
 
 ### Classes
 Since this is tailored for my personal game, the logic for displaying player information is built around the character's names- NOT classes. It's also worth noting that I have used `_class` in code instead of `class` - class is a reserved keyword and can't be used as a variable in JavaScript. Unfortunately there wasn't another logical word choice I could think of, so the _ remains.
