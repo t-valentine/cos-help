@@ -12,8 +12,9 @@ body {
     padding: 0;
 }
 
-h2 {
+h2, h3 {
   color: #2e198d;
+  margin: 10px;
 }
 
 select {
@@ -50,7 +51,7 @@ select {
 }
 
 .mini-box:not(#character-section) div:first-child {
-  width: 100%;
+  width: 80%;
 }
 
 .mini-box:not(#character-section) div:last-child {
@@ -60,6 +61,11 @@ select {
   justify-content: center;
   padding: 2px;
   width: 100%;
+}
+
+
+.mini-box:not(#character-section) select {
+  width: 85%;
 }
 
 .answer {
