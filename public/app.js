@@ -286,11 +286,14 @@ const barbarianHelper = (div, level) => {
 };
 
 /**
- * Calculates Cleric Spellcasting info and passes to SpellcasterHelper
+ * Calculates and displays spell information for full spellcaster classes
  * @param {*} div where the information will return on the webpage
+ * @param {*} div2 where the information will return on the webpage
  * @param {*} proficiency character's proficiency bonus as calculated in characterHelp()
  * @param {*} level character's current level
- * @param {*} modifier character's Dexterity modifier
+ * @param {*} modifier character's spellcasting modifier 
+ * @param {*} _class character's combat class
+ * @returns Spellcasting ability, Spellcasting Modifier, Spell Save, and Spells Known
  */
 const spellcasterHelper = (div, proficiency, level, modifier, _class) => {
   let ability, spellSave, attackMod;
@@ -309,12 +312,37 @@ const spellcasterHelper = (div, proficiency, level, modifier, _class) => {
           result.append("Please refresh page");
   }
 
-  spellcasterHelper(
-    div,
-    ability,
-    spellcastModifier,
-    spellSave,
-    cantrips,
-    spellsKnown
-  );
-};
+  // Spell Ability
+  let spellAbilityTxt = div.appendChild(document.createElement('p'));
+  spellAbilityTxt.classList.add("character-stats");
+  let spellAbilityTitle = spellAbilityTxt.appendChild(document.createElement('span'))
+  spellAbilityTitle.classList.add('bolder');
+  spellAbilityTitle.append("Spellcasting Ability: ");
+  spellAbilityTxt.append(ability);
+
+  // Spell Modifier
+  let modifiertxt = div.appendChild(document.createElement('p'));
+  modifiertxt.classList.add("character-stats");
+  let modifierTitle = modifiertxt.appendChild(document.createElement('span'))
+  modifierTitle.classList.add('bolder');
+  modifierTitle.append("Spellcasting Modifier: ");
+  modifiertxt.append(`+${proficiency + modifier}`);
+
+  // Spell Save
+  let spellSaveTxt = div.appendChild(document.createElement('p'));
+  spellSaveTxt.classList.add("character-stats");
+  let spellSaveTitle = spellSaveTxt.appendChild(document.createElement('span'))
+  spellSaveTitle.classList.add('bolder');
+  spellSaveTitle.append("Spell Save: ");
+  spellSaveTxt.append(modifier + proficiency + 8);
+
+  if (_class == 'cleric' || _class == 'artificer') {
+    // Spells Known
+    let spellKnownTxt = div.appendChild(document.createElement('p'));
+    spellKnownTxt.classList.add("character-stats");
+    let spellKnownTitle = spellKnownTxt.appendChild(document.createElement('span'))
+    spellKnownTitle.classList.add('bolder');
+    spellKnownTitle.append("Spells Known: ");
+    spellKnownTxt.append(0);
+  }
+} 
