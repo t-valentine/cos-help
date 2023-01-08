@@ -162,7 +162,7 @@ const monkHelper = (div, proficiency, level, modifier) => {
   abilityTxt.classList.add("character-stats");
   let abilityalTitle = abilityTxt.appendChild(document.createElement('span'))
   abilityalTitle.classList.add("bolder");
-  abilityalTitle.append("Dexterity Modifier: ");
+  abilityalTitle.append("Dexterity Modifier: +");
   abilityTxt.append(modifier);
 
   let martialTxt = div.appendChild(document.createElement('p'));
